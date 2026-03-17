@@ -1,23 +1,12 @@
-# Render Blueprint: backend API for Digital Twin
-# Connect your repo in Render dashboard; this file configures the web service.
-
 services:
   - type: web
     name: digital-twin-api
     runtime: node
-
     buildCommand: npm install
     startCommand: npm start
-
-    # Render sets PORT automatically; server.js uses process.env.PORT
-
     envVars:
       - key: OPENROUTER_API_KEY
         sync: false
       - key: NODE_ENV
         value: production
-    # Optional: add in Render dashboard after create
-    # - BRAVE_API_KEY
-    # - FRONTEND_ORIGIN (e.g. https://your-app.netlify.app)
-
     plan: free

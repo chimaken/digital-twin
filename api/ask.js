@@ -1,8 +1,3 @@
-/**
- * Digital twin API: Router → RAG agent (CV) or Research agent (web).
- * POST { "question": "..." } → { answer, source: "cv" | "research" }
- */
-
 import 'dotenv/config';
 import { retrieve, chunksToContext } from '../lib/rag.js';
 import { chat } from '../lib/openrouter.js';

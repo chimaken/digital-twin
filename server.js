@@ -1,9 +1,3 @@
-/**
- * API server for Render (or local). Serves /api/ask and /health.
- * Frontend can be deployed separately on Vercel/Netlify and call this API.
- * Run: npm run dev (local) or npm start (Render)
- */
-
 import 'dotenv/config';
 import http from 'http';
 import { readFile } from 'fs/promises';
@@ -13,8 +7,6 @@ import handler from './api/ask.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 3005;
-
-// CORS: allow frontend on Vercel/Netlify (set FRONTEND_ORIGIN or allow common origins)
 const CORS_ORIGIN = process.env.FRONTEND_ORIGIN || '*';
 
 function setCors(res) {
@@ -34,14 +26,12 @@ const server = http.createServer(async (req, res) => {
   const url = new URL(req.url || '/', `http://localhost:${PORT}`);
   const path = url.pathname;
 
-  // Health check (for Render and load balancers)
   if (path === '/health' || path === '/api/health') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: true, service: 'digital-twin-api' }));
     return;
   }
 
-  // POST /api/ask → Router → RAG or Research
   if (path === '/api/ask' && req.method === 'POST') {
     const chunks = [];
     for await (const chunk of req) chunks.push(chunk);
@@ -72,7 +62,6 @@ const server = http.createServer(async (req, res) => {
     return handler(reqProxy, resProxy);
   }
 
-  // GET / → test page (local dev; frontend is on Vercel/Netlify in production)
   if (path === '/' || path === '/index.html') {
     try {
       const file = await readFile(join(__dirname, 'public', 'index.html'), 'utf8');

@@ -1,10 +1,3 @@
-/**
- * Stage 1: CV ingestion
- * Reads your CV PDF, extracts text, chunks it, and writes data/cv-chunks.json.
- * Run: npm run ingest-cv
- * Prerequisite: Put your CV at data/cv/cv.pdf
- */
-
 import { readFile, writeFile, mkdir } from 'fs/promises';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
@@ -25,9 +18,6 @@ async function ensureDir(dir) {
   await mkdir(dir, { recursive: true });
 }
 
-/**
- * Normalize whitespace and trim. Keep single newlines for structure.
- */
 function normalizeText(text) {
   if (!text || typeof text !== 'string') return '';
   return text
@@ -38,9 +28,6 @@ function normalizeText(text) {
     .trim();
 }
 
-/**
- * Split text into overlapping chunks by size, trying to break on sentence or paragraph.
- */
 function chunkText(text) {
   const normalized = normalizeText(text);
   if (!normalized) return [];

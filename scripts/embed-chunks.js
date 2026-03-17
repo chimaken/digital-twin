@@ -1,9 +1,3 @@
-/**
- * Stage 2 (build step): Embed CV chunks via OpenRouter and write data/cv-embeddings.json.
- * Run: npm run embed-chunks
- * Requires: OPENROUTER_API_KEY in .env (or env), data/cv-chunks.json (from npm run ingest-cv)
- */
-
 import 'dotenv/config';
 import { readFile, writeFile, mkdir } from 'fs/promises';
 import { dirname, join } from 'path';
