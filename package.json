@@ -1,0 +1,20 @@
+{
+  "name": "digital-twin",
+  "version": "0.1.0",
+  "description": "Digital twin that answers questions about you using CV (RAG) and web research, OpenRouter, vanilla frontend",
+  "type": "module",
+  "scripts": {
+    "ingest-cv": "node scripts/ingest-cv.js",
+    "embed-chunks": "node scripts/embed-chunks.js",
+    "build": "npm run ingest-cv && npm run embed-chunks",
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": ["digital-twin", "rag", "openrouter"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "pdf-parse": "^1.1.1"
+  }
+}

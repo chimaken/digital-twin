@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.local
+*.log
+.DS_Store
+
+# Optional: ignore generated RAG data if you prefer to regenerate on deploy
+# data/cv-chunks.json
+# data/cv-text.json
+# data/cv-embeddings.json
